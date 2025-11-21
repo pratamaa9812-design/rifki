@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy 3rd Anniversary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #4c1d95 0%, #020617 40%, #020617 100%);
+      --accent: #f472b6;
+      --accent-soft: rgba(244, 114, 182, 0.2);
+      --accent-strong: #fb7185;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --border-soft: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.9);
+      --radius-xl: 1.75rem;
+      --transition-soft: all 0.6s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #020617;
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* GENERAL PAGE CONTAINERS */
+    .page {
+      position: absolute;                     /* FIX */
+      inset: 0;
+      min-height: 100vh;                      /* FIX */
+      overflow-y: auto;                       /* FIX */
+      -webkit-overflow-scrolling: touch;      /* FIX */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .page.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* LANDING PAGE */
+    .page-1 {
+      background: var(--bg-gradient);
+      overflow: hidden;
+    }
+
+    .page-1-inner {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      min-height: clamp(420px, 70vh, 580px);
+      border-radius: 2.5rem;
+      padding: clamp(2rem, 4vw, 3rem);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95));
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      overflow: hidden;
+    }
+
+    /* Glow blob */
+    .glow-ball {
+      position: absolute;
+      width: 50vw;
+      max-width: 480px;
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.85), rgba(129, 140, 248, 0.3), transparent 70%);
+      filter: blur(42px);
+      opacity: 0.65;
+      top: -20%;
+      right: -10%;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .landing-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.2rem;
+    }
+
+    .landing-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.8);
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      width: fit-content;
+    }
+
+    .landing-label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .counter-wrapper {
+      max-width: 100%;
+    }
+
+    .days-text {
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.18em;
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .days-number-wrapper {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      margin-top: 0.35rem;
+    }
+
+    #dayCounter {
+      font-size: clamp(3.6rem, 7vw, 5rem);
+      font-weight: 600;
+      text-shadow:
+        0 0 18px rgba(59, 130, 246, 0.6),
+        0 0 32px rgba(236, 72, 153, 0.75);
+      background: linear-gradient(135deg, #e5e7eb, #f9a8d4, #c4b5fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.08em;
+    }
+
+    .days-unit {
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+    }
+
+    .sub-caption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 23rem;
+    }
+
+    /* Typing text */
+    .typing-wrapper {
+      max-width: 560px;
+      position: relative;
+      font-size: 1rem;
+      color: #e5e7eb;
+    }
+
+    #typingText {
+      min-height: 1.4em;
+      font-weight: 300;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      margin-left: 2px;
+      background: #e5e7eb;
+      animation: blink 0.8s infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0;
+      }
+    }
+
+    /* Next button */
+    .btn-next {
+      margin-top: 1.2rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      border: 0;
+      outline: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ec4899, #6366f1);
+      color: #f9fafb;
+      box-shadow:
+        0 12px 30px rgba(236, 72, 153, 0.5),
+        0 18px 65px rgba(79, 70, 229, 0.6);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+    }
+
+    .btn-next::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(248, 250, 252, 0.5), transparent 60%);
+      opacity: 0;
+      transform: translateX(-30%);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 16px 38px rgba(236, 72, 153, 0.65),
+        0 22px 70px rgba(79, 70, 229, 0.75);
+      filter: brightness(1.02);
+    }
+
+    .btn-next:hover::before {
+      opacity: 1;
+      transform: translateX(5%);
+    }
+
+    .btn-next:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow:
+        0 8px 24px rgba(236, 72, 153, 0.5),
+        0 16px 44px rgba(79, 70, 229, 0.65);
+    }
+
+    /* Hearts & sparkles container */
+    .floating-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -2rem;
+      font-size: 0.9rem;
+      color: #fb7185;
+      opacity: 0;
+      filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.9));
+      animation-name: floatUp;
+      animation-timing-function: linear;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      60% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-110vh) translateX(-20px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #e5e7eb 0%, rgba(248, 250, 252, 0) 70%);
+      opacity: 0;
+      box-shadow: 0 0 12px rgba(249, 250, 251, 0.9);
+      animation: sparkleFloat 6s linear infinite;
+    }
+
+    @keyframes sparkleFloat {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.6);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.7;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-80vh) translateX(14px) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* PAGE 2 - MESSAGE & GALLERY */
+    .page-2 {
+      background: radial-gradient(circle at top, #020617 0%, #020617 40%, #020617 100%);
+      padding-inline: 1.25rem;
+    }
+
+    .page-2-inner {
+      max-width: 1100px;
+      width: 100%;
+      margin-inline: auto;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.94));
+      border-radius: 2.5rem;
+      padding: clamp(2rem, 4vw, 3rem);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-2-inner::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at 10% 0%, rgba(129, 140, 248, 0.32), transparent 60%);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-2-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
+      gap: clamp(2rem, 4vw, 3rem);
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .page-2-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .anniv-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .anniv-heading {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.9rem, 3.2vw, 2.4rem);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    .anniv-heading span.script {
+      display: inline-block;
+      font-family: "Great Vibes", cursive;
+      font-size: 1.7em;
+      line-height: 0.9;
+      margin-left: 0.3rem;
+      color: var(--accent);
+      text-shadow: 0 0 16px rgba(236, 72, 153, 0.8);
+    }
+
+    .anniv-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .anniv-paragraph {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #e5e7eb;
+      margin-bottom: 1rem;
+    }
+
+    .anniv-paragraph + .anniv-paragraph {
+      margin-top: 0.6rem;
+    }
+
+    .soft-divider {
+      width: 62px;
+      height: 1px;
+      background: linear-gradient(to right, rgba(148, 163, 184, 0.2), rgba(248, 113, 113, 0.9), rgba(148, 163, 184, 0.2));
+      margin-block: 1.6rem;
+    }
+
+    .small-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* GALLERY */
+    .gallery-wrapper {
+      position: relative;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.96));
+      border-radius: 2rem;
+      padding: 1.3rem 1.3rem 1.4rem;
+      border: 1px solid var(--border-soft);
+      box-shadow:
+        0 18px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(248, 250, 252, 0.02);
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .gallery-badge {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, 0.7);
+      color: #fecaca;
+      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.2), transparent 60%);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 1.5rem 1rem;
+      }
+      .page-1-inner, .page-2-inner {
+        border-radius: 1.8rem;
+        padding: 1.7rem 1.3rem 1.6rem;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.2rem;
+      background: #020617;
+      aspect-ratio: 3 / 4;
+      cursor: pointer;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+      transform-origin: center;
+      transition: transform 0.7s ease, box-shadow 0.7s ease, border-color 0.7s ease;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.04);
+      transition: transform 0.7s ease, filter 0.7s ease;
+      filter: saturate(1.1) contrast(1.04);
+    }
+
+    .photo-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.55), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .photo-meta {
+      position: absolute;
+      left: 0.9rem;
+      bottom: 0.75rem;
+      right: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: #e5e7eb;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .photo-meta span {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .photo-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.95);
+      border-color: rgba(248, 113, 113, 0.65);
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.09);
+      filter: saturate(1.2) contrast(1.06) brightness(1.03);
+    }
+
+    .photo-card:hover::after {
+      opacity: 1;
+    }
+
+    .photo-card:hover .photo-meta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Music button */
+    .music-toggle {
+      position: fixed;
+      right: 1.7rem;
+      bottom: 1.7rem;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+      transition: var(--transition-soft);
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+    }
+
+    .music-toggle.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .music-toggle-icon {
+      font-size: 1rem;
+    }
+
+    .music-toggle.playing {
+      border-color: rgba(236, 72, 153, 0.95);
+      box-shadow:
+        0 18px 48px rgba(236, 72, 153, 0.3),
+        0 0 0 1px rgba(248, 250, 252, 0.05);
+    }
+
+    .music-toggle-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+    }
+
+    @media (max-width: 640px) {
+      .music-toggle {
+        right: 1.1rem;
+        bottom: 1.1rem;
+      }
+
+      #dayCounter {
+        letter-spacing: 0.06em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE 1: LANDING / 1095 HARI -->
+  <section class="page page-1 active" id="page1">
+    <div class="page-1-inner">
+      <div class="glow-ball"></div>
+
+      <!-- Floating effects -->
+      <div class="floating-layer" id="floatingLayer"></div>
+
+      <div class="landing-content">
+        <div class="landing-label">
+          <span class="landing-label-dot"></span>
+          <span>Our Story Timeline</span>
+        </div>
+
+        <div class="counter-wrapper">
+          <div class="days-text">Hai Putrii</div>
+          <div class="days-number-wrapper">
+            <span id="dayCounter">0</span>
+            <span class="days-unit">hari</span>
+          </div>
+          <p class="sub-caption">
+            engga kerasa yaa sayang sudah 3 tahun
+          </p>
+        </div>
+
+    
+
+        <button class="btn-next" id="nextBtn">
+          Klik ini Utiii &nbsp;
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2: UCAPAN + FOTO -->
+  <section class="page page-2" id="page2">
+    <div class="page-2-inner">
+      <div class="page-2-content">
+        <!-- LEFT: Text -->
+        <div>
+          <div class="anniv-label">3 tahun, 36 bulan, 1095 hari</div>
+          <h1 class="anniv-heading">
+            
+            <span class="script">3rd   Anniversary</span> ❤️
+          </h1>
+          <p class="anniv-subtitle">
+            Terimakasih banyak ya selama ini bareng sama aku terus, dan mohon maaf kalo aku masih banyak kurangnya.
+          </p>
+
+          <p class="anniv-paragraph">
+        
+          </p>
+          <p class="anniv-paragraph">
+            Aku seneng dan bahagia banget bisa kenal kamu (Nur Hidayah Saputri), beneran aku mau banget sama kamu terus selama-lamanya,
+            meskipun sekarang kita banyak masalah tapi aku yakin kita bisa balik lagi kaya dulu (optimis saja dulu hehe).
+            Mungkin perjalanan kita masih panjang tapi aku serius sama kamu dan aku bakal usahain biar kita sampe nikah (AMIN PALING KENCENG HEHEHE), 
+          </p>
+
+          <div class="soft-divider"></div>
+
+          <p class="small-note">
+             <strong>“Terimakasiiiii banyaaaaaa yaaaaaa”</strong>
+          </p>
+        </div>
+
+        <!-- RIGHT: Gallery -->
+        <div class="gallery-wrapper">
+          <div class="gallery-header">
+            <div>
+              <div class="gallery-title">Our Gallery</div>
+            </div>
+            <div class="gallery-badge">
+              3 Years
+            </div>
+          </div>
+
+          <div class="gallery-grid">
+            <!-- Ganti src dengan foto kalian sendiri -->
+            <div class="photo-card">
+              <img src="images/0.jpg"
+                   alt="Moment 1" />
+              <div class="photo-meta">
+              </div>
+            </div>
+            <div class="photo-card">
+              <img src="images/1.jpg"
+                   alt="Moment 2" />
+              <div class="photo-meta">
+              </div>
+            </div>
+            <div class="photo-card">
+              <img src="images/2.jpg"
+                   alt="Moment 3" />
+              <div class="photo-meta">
+              </div>
+            </div>
+            <div class="photo-card">
+              <img src="images/3.jpg"
+                   alt="Moment 4" />
+              <div class="photo-meta">
+              </div>
+            </div>
+            <div class="photo-card">
+             <img src="images/4.jpg"
+                   alt="Moment 5" />
+              <div class="photo-meta">
+
+              </div>
+            </div>
+            <div class="photo-card">
+              <<img src="images/5.jpg"
+                   alt="Moment 6" />
+              <div class="photo-meta">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Music button -->
+    <button class="music-toggle" id="musicToggle" type="button">
+      <span class="music-toggle-icon">♫</span>
+      <span>Play music</span>
+      <span class="music-toggle-dot"></span>
+    </button>
+
+    <!-- Ganti src ini dengan lagu kalian sendiri (mp3) -->
+    <audio id="bgMusic" loop>
+      <!-- Contoh: <source src="music/our-song.mp3" type="audio/mpeg" /> -->
+      <!-- Default: tidak ada file, user tinggal ganti -->
+    </audio>
+  </section>
+
+  <script>
+    // ===============================
+    // PAGE 1: COUNTER ANIMATION
+    // ===============================
+    function animateCounter(element, target, duration) {
+      const start = 0;
+      const startTime = performance.now();
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.floor(start + (target - start) * progress);
+        element.textContent = value.toLocaleString("id-ID");
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // ===============================
+    // PAGE 1: TYPING EFFECT
+    // ===============================
+    function typeText(element, text, speed) {
+      let index = 0;
+
+      function type() {
+        element.textContent = text.slice(0, index);
+        index++;
+        if (index <= text.length) {
+          setTimeout(type, speed);
+        }
+      }
+
+      type();
+    }
+
+    // ===============================
+    // FLOATING HEARTS & SPARKLES
+    // ===============================
+    function createHeart(container) {
+      const heart = document.createElement("span");
+      heart.classList.add("heart");
+      heart.textContent = "❤";
+
+      const randomLeft = Math.random() * 100;
+      heart.style.left = randomLeft + "vw";
+      heart.style.fontSize = 0.8 + Math.random() * 0.7 + "rem";
+      const duration = 5 + Math.random() * 3;
+      heart.style.animationDuration = duration + "s";
+
+      container.appendChild(heart);
+
+      heart.addEventListener("animationend", () => {
+        heart.remove();
+      });
+    }
+
+    function createSparkle(container) {
+      const sparkle = document.createElement("span");
+      sparkle.classList.add("sparkle");
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.bottom = Math.random() * 40 + "vh";
+      sparkle.style.animationDuration = 5 + Math.random() * 4 + "s";
+
+      container.appendChild(sparkle);
+
+      sparkle.addEventListener("animationend", () => {
+        sparkle.remove();
+      });
+    }
+
+    // ===============================
+    // PAGE TRANSITION
+    // ===============================
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    const nextBtn = document.getElementById("nextBtn");
+    const musicToggle = document.getElementById("musicToggle");
+
+    nextBtn.addEventListener("click", () => {
+      // Fade out page1
+      page1.style.opacity = "0";
+      page1.style.transform = "translateY(-20px)";
+      page1.style.pointerEvents = "none";
+
+      setTimeout(() => {
+        page1.classList.remove("active");
+        page2.classList.add("active");
+
+        // Show music toggle with soft delay
+        setTimeout(() => {
+          musicToggle.classList.add("visible");
+        }, 600);
+      }, 800);
+    });
+
+    // ===============================
+    // MUSIC CONTROL
+    // ===============================
+    const bgMusic = document.getElementById("bgMusic");
+
+    musicToggle.addEventListener("click", () => {
+      if (!bgMusic.src) {
+        alert("Silakan ganti src audio terlebih dahulu dengan lagu kalian (file .mp3).");
+        return;
+      }
+
+      if (bgMusic.paused) {
+        bgMusic
+          .play()
+          .then(() => {
+            musicToggle.classList.add("playing");
+            musicToggle.querySelector("span:nth-child(2)").textContent = "Pause music";
+          })
+          .catch(() => {
+            alert("Browser memblokir auto-play. Coba klik sekali lagi ya ♡");
+          });
+      } else {
+        bgMusic.pause();
+        musicToggle.classList.remove("playing");
+        musicToggle.querySelector("span:nth-child(2)").textContent = "Play music";
+      }
+    });
+
+    // ===============================
+    // INIT ON LOAD
+    // ===============================
+    document.addEventListener("DOMContentLoaded", () => {
+      const counterElement = document.getElementById("dayCounter");
+      animateCounter(counterElement, 1095, 2500);
+
+      const typingElement = document.getElementById("typingText");
+      const typingText = "Terima kasih sudah bersama selama ini…";
+      setTimeout(() => {
+        typeText(typingElement, typingText, 75);
+      }, 400);
+
+      const floatingLayer = document.getElementById("floatingLayer");
+
+      // Create hearts & sparkles periodically
+      setInterval(() => createHeart(floatingLayer), 850);
+      setInterval(() => createSparkle(floatingLayer), 1200);
+    });
+  </script>
+</body>
+</html>
