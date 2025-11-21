@@ -34,8 +34,10 @@
       padding: 0;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
+      min-height: 100dvh;
     }
 
     body {
@@ -45,10 +47,12 @@
       overflow-x: hidden;
     }
 
-   .page {
+    /* GENERAL PAGE CONTAINERS */
+    .page {
       position: absolute;
       inset: 0;
-      min-height: 100dvh;      /* FIXED here */
+      min-height: 100vh;
+      min-height: 100dvh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       display: flex;
@@ -205,10 +209,12 @@
     }
 
     @keyframes blink {
-      0%, 50% {
+      0%,
+      50% {
         opacity: 1;
       }
-      51%, 100% {
+      51%,
+      100% {
         opacity: 0;
       }
     }
@@ -422,7 +428,12 @@
     .soft-divider {
       width: 62px;
       height: 1px;
-      background: linear-gradient(to right, rgba(148, 163, 184, 0.2), rgba(248, 113, 113, 0.9), rgba(148, 163, 184, 0.2));
+      background: linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.2),
+        rgba(248, 113, 113, 0.9),
+        rgba(148, 163, 184, 0.2)
+      );
       margin-block: 1.6rem;
     }
 
@@ -471,19 +482,6 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.8rem;
-    }
-
-    @media (max-width: 768px) {
-      .page {
-        padding: 1.5rem 1rem;
-      }
-      .page-1-inner, .page-2-inner {
-        border-radius: 1.8rem;
-        padding: 1.7rem 1.3rem 1.6rem;
-      }
-      .gallery-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
     }
 
     .photo-card {
@@ -560,6 +558,27 @@
       transform: translateY(0);
     }
 
+    @media (max-width: 768px) {
+      .page {
+        align-items: flex-start;
+        padding: calc(1.5rem + env(safe-area-inset-top, 0px)) 1rem 1.5rem;
+      }
+
+      .page-1-inner,
+      .page-2-inner {
+        border-radius: 1.8rem;
+        padding: 1.7rem 1.3rem 1.6rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #dayCounter {
+        letter-spacing: 0.06em;
+      }
+    }
+
     /* Music button */
     .music-toggle {
       position: fixed;
@@ -614,10 +633,6 @@
         right: 1.1rem;
         bottom: 1.1rem;
       }
-
-      #dayCounter {
-        letter-spacing: 0.06em;
-      }
     }
   </style>
 </head>
@@ -647,7 +662,9 @@
           </p>
         </div>
 
-    
+        <div class="typing-wrapper">
+          <span id="typingText"></span><span class="typing-cursor"></span>
+        </div>
 
         <button class="btn-next" id="nextBtn">
           Klik ini Utiii &nbsp;
@@ -664,26 +681,24 @@
         <div>
           <div class="anniv-label">3 tahun, 36 bulan, 1095 hari</div>
           <h1 class="anniv-heading">
-            
-            <span class="script">3rd   Anniversary</span> ❤️
+            <span class="script">3rd Anniversary</span> ❤️
           </h1>
           <p class="anniv-subtitle">
-            Terimakasih banyak ya selama ini bareng sama aku terus, dan mohon maaf kalo aku masih banyak kurangnya.
+            Terimakasih banyak ya buat 3 tahun ini sayang, dan mohon maaf kalo aku masih banyak salah.
           </p>
 
           <p class="anniv-paragraph">
-        
           </p>
           <p class="anniv-paragraph">
-            Aku seneng dan bahagia banget bisa kenal kamu (Nur Hidayah Saputri), beneran aku mau banget sama kamu terus selama-lamanya,
+            Aku seneng dan bahagia banget bisa kenal kamu, beneran aku mau banget sama kamu terus selama-lamanya,
             meskipun sekarang kita banyak masalah tapi aku yakin kita bisa balik lagi kaya dulu (optimis saja dulu hehe).
-            Mungkin perjalanan kita masih panjang tapi aku serius sama kamu dan aku bakal usahain biar kita sampe nikah (AMIN PALING KENCENG HEHEHE), 
+            Mungkin perjalanan kita masih panjang tapi aku serius sama kamu dan aku bakal usahain biar kita sampe nikah (AMIN PALING KENCENG HEHEHE),
           </p>
 
           <div class="soft-divider"></div>
 
           <p class="small-note">
-             <strong>“Terimakasiiiii banyaaaaaa yaaaaaa”</strong>
+            <strong>“Terimakasiiiii banyaaaaaa yaaaaaa”</strong>
           </p>
         </div>
 
@@ -701,60 +716,60 @@
           <div class="gallery-grid">
             <!-- Ganti src dengan foto kalian sendiri -->
             <div class="photo-card">
-              <img src="images/0.jpg"
-                   alt="Moment 1" />
-              <div class="photo-meta">
-              </div>
+              <img src="images/0.jpg" alt="Moment 1" />
+              <div class="photo-meta"></div>
             </div>
             <div class="photo-card">
-              <img src="images/1.jpg"
-                   alt="Moment 2" />
-              <div class="photo-meta">
-              </div>
+              <img src="images/1.jpg" alt="Moment 2" />
+              <div class="photo-meta"></div>
             </div>
             <div class="photo-card">
-              <img src="images/2.jpg"
-                   alt="Moment 3" />
-              <div class="photo-meta">
-              </div>
+              <img src="images/2.jpg" alt="Moment 3" />
+              <div class="photo-meta"></div>
             </div>
             <div class="photo-card">
-              <img src="images/3.jpg"
-                   alt="Moment 4" />
-              <div class="photo-meta">
-              </div>
+              <img src="images/3.jpg" alt="Moment 4" />
+              <div class="photo-meta"></div>
             </div>
             <div class="photo-card">
-             <img src="images/4.jpg"
-                   alt="Moment 5" />
-              <div class="photo-meta">
-
-              </div>
+              <img src="images/4.jpg" alt="Moment 5" />
+              <div class="photo-meta"></div>
             </div>
             <div class="photo-card">
-              <<img src="images/5.jpg"
-                   alt="Moment 6" />
-              <div class="photo-meta">
-              </div>
+              <img src="images/5.jpg" alt="Moment 6" />
+              <div class="photo-meta"></div>
+                        </div>
+            <div class="photo-card">
+              <img src="images/6.jpg" alt="Moment 7" />
+              <div class="photo-meta"></div>
+            </div>
+            <div class="photo-card">
+              <img src="images/7.jpg" alt="Moment 8" />
+              <div class="photo-meta"></div>
+                          </div>
+            <div class="photo-card">
+              <img src="images/8.jpg" alt="Moment 9" />
+              <div class="photo-meta"></div>
+            </div>
+            <div class="photo-card">
+              <img src="images/9.jpg" alt="Moment 10" />
+              <div class="photo-meta"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Music button -->
-    <button class="music-toggle" id="musicToggle" type="button">
-      <span class="music-toggle-icon">♫</span>
-      <span>Play music</span>
-      <span class="music-toggle-dot"></span>
-    </button>
-
-    <!-- Ganti src ini dengan lagu kalian sendiri (mp3) -->
-    <audio id="bgMusic" loop>
-      <!-- Contoh: <source src="music/our-song.mp3" type="audio/mpeg" /> -->
-      <!-- Default: tidak ada file, user tinggal ganti -->
-    </audio>
   </section>
+
+  <!-- MUSIC TOGGLE & AUDIO -->
+  <button class="music-toggle" id="musicToggle">
+    <span class="music-toggle-icon">🎵</span>
+    <span>Play music</span>
+    <span class="music-toggle-dot"></span>
+  </button>
+
+  <!-- Ganti src ini ke file .mp3 kamu -->
+  <audio id="bgMusic" src="music/There Is a Light That Never Goes Out (2011 Remaster) (1).mp3" loop></audio>
 
   <script>
     // ===============================
@@ -891,7 +906,7 @@
       animateCounter(counterElement, 1095, 2500);
 
       const typingElement = document.getElementById("typingText");
-      const typingText = "Terima kasih sudah bersama selama ini…";
+      const typingText = "I Loveeeeeeeeee Youuuuuuuuuuuu Moreeeeeeeeeeee";
       setTimeout(() => {
         typeText(typingElement, typingText, 75);
       }, 400);
